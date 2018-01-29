@@ -1,14 +1,21 @@
 package asteriskconfig;
 
-public class IncludeProperty extends PropertyBase {
+public class IncludeProperty extends ValueOnlyImpl implements IValueOnly {
 	public static final String DELIMITER = " ";
 
 	public IncludeProperty(String value) {
-		super("#include", value, true);
+		super(value);
+	}
+	
+	public IncludeProperty(String value, String comment) {
+		super(value, comment);
 	}
 
 	@Override
 	public String toString() {
-		return String.format("#include %s", getValue());
+		StringBuilder sb = new StringBuilder();
+		sb.append("#include ");
+		sb.append(super.toString());
+		return sb.toString();
 	}
 }

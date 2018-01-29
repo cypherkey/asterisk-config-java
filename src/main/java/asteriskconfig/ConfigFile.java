@@ -12,9 +12,9 @@ public class ConfigFile {
 	}
 	
 	public ConfigSection createNewSection(String sectionName) throws SectionAlreadyExistsException {
-		if (sections.containsKey(sectionName)) {
+		if (sections.containsKey(sectionName))
 			throw new SectionAlreadyExistsException(String.format("Section %s already exists", sectionName));
-		} else {
+		else {
 			ConfigSection newSection = new ConfigSection(sectionName);
 			sections.put(sectionName, newSection);
 			return newSection;
@@ -31,8 +31,13 @@ public class ConfigFile {
 	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
+
+		// Global section first
+		sb.append(sections.get(ConfigSection.GLOBAL_SECTION));
+		
 		for(ConfigSection section : sections.values()) {
-			sb.append(section.toString());
+			if (! section.getName().equalsIgnoreCase(ConfigSection.GLOBAL_SECTION))
+				sb.append(section.toString());
 		}
 		return sb.toString();
 	}

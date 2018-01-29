@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import asteriskconfig.ConfigSection;
 import asteriskconfig.IncludeProperty;
-import asteriskconfig.KeyValueProperty;
+import asteriskconfig.ConfigEntry;
 import org.junit.Test;
 
 public class ConfigSectionTest {
@@ -19,35 +19,20 @@ public class ConfigSectionTest {
 	@Test
 	public void testAddProperty() {
 		ConfigSection section = new ConfigSection("test");
-		section.addProperty(new KeyValueProperty("bob", "alice"));
+		section.addProperty(new ConfigEntry("bob", "alice"));
 		section.addProperty(new IncludeProperty("file1"));
 		
+		assertEquals(2, section.getProperties().size());
+		assertEquals("bob", ((IKeyValue)section.getProperties().get(0)).getKey());
+		assertEquals("alice", ((IKeyValue)section.getProperties().get(0)).getValue());
 	}
 
 	@Test
 	public void testSerialization() {
 		ConfigSection section = new ConfigSection("test");
-		section.addProperty(new KeyValueProperty("bob", "alice"));
+		section.addProperty(new ConfigEntry("bob", "alice"));
 		section.addProperty(new IncludeProperty("file1"));
 		
 		assertEquals(String.format("[test]%nbob = alice%n#include file1%n"), section.toString());
-	}
-
-	@Test
-	public void testDuplicateKeyValueProperty() {
-		ConfigSection section = new ConfigSection("test");
-		section.addProperty(new KeyValueProperty("bob", "alice"));
-		section.addProperty(new KeyValueProperty("bob", "mary"));
-
-		assertEquals(String.format("[test]%nbob = mary%n"), section.toString());
-	}
-
-	@Test
-	public void testDuplicateIncludeProperty() {
-		ConfigSection section = new ConfigSection("test");
-		section.addProperty(new IncludeProperty("file1"));
-		section.addProperty(new IncludeProperty("file2"));
-
-		assertEquals(String.format("[test]%n#include file1%n#include file2%n"), section.toString());
 	}
 }
