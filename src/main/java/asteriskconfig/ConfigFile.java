@@ -26,7 +26,10 @@ public class ConfigFile {
 	}
 	
 	public ConfigSection getSection(String sectionName) {
-		return sections.get(sectionName);
+		if (sections.containsKey(sectionName))
+			return sections.get(sectionName);
+		else
+			throw new SectionNotFoundException(sectionName);
 	}
 	
 	public String toString() {

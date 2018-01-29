@@ -43,7 +43,7 @@ public class AstConfigParser {
 			else if (line.startsWith(SECTION_START) && line.endsWith(SECTION_END)) {
 
 				// Parse the section name by dropping the first and last character
-				String sectionName = line.substring(1, line.length() - 2).trim();
+				String sectionName = line.substring(1, line.length() - 1).trim();
 
 				// Attempt to create a new section. Throw an exception if it already exists.
 				try {
@@ -66,7 +66,7 @@ public class AstConfigParser {
 						throw new InvalidFileFormatException("Include directive has too many parts");
 					}
 					IncludeProperty property = new IncludeProperty(tokens[1].trim(), comment);
-					config.getGlobal().addProperty(property);
+					currentSection.addProperty(property);
 				}
 				else if (line.contains(DIRECTIVE_DELIMITER)) {
 					String[] tokens = line.split(DIRECTIVE_DELIMITER);
