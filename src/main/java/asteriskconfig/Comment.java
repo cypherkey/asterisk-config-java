@@ -3,6 +3,7 @@ package asteriskconfig;
 public class Comment extends ValueOnlyImpl implements IValueOnly {
 	public Comment(String comment)
 	{
+		// Comments are their own value
 		super("", comment);
 	}
 	

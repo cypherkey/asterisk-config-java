@@ -7,6 +7,7 @@ public class ConfigFile {
 	private Map<String, ConfigSection> sections = new HashMap<String, ConfigSection>();
 	
 	public ConfigFile() {
+		// All configuration files have a global section
 		ConfigSection newSection = new ConfigSection(ConfigSection.GLOBAL_SECTION);
 		sections.put(ConfigSection.GLOBAL_SECTION, newSection);
 	}
@@ -38,6 +39,7 @@ public class ConfigFile {
 		// Global section first
 		sb.append(sections.get(ConfigSection.GLOBAL_SECTION));
 		
+		// Serialize the remaining sections
 		for(ConfigSection section : sections.values()) {
 			if (! section.getName().equalsIgnoreCase(ConfigSection.GLOBAL_SECTION))
 				sb.append(section.toString());

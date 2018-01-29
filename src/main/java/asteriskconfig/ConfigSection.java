@@ -26,6 +26,10 @@ public class ConfigSection {
 		return properties;
 	}
 	
+	public IEntry get(Integer index) {
+		return properties.get(index);
+	}
+	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		
