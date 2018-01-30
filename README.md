@@ -17,3 +17,13 @@ Each of these entries are part of a configuration file section. For example:
 setting = value
 #include somefile.conf
 ```
+
+A configuration file can contain multiple sections. For example:
+```
+[general]
+setting = value
+#include somefile.conf
+
+[parking]
+600 = x
+```
