@@ -23,7 +23,20 @@ public class ConfigFileTest {
 		assertTrue(configFile.hasSection("section1"));
 	}
 
-	@Test(expected = SectionAlreadyExistsException.class)
+	@Test
+    public void testHasSection() {
+        ConfigFile configFile = new ConfigFile();
+        assertTrue(configFile.hasSection(ConfigSection.GLOBAL_SECTION));
+        assertFalse(configFile.hasSection("invalid"));
+    }
+
+    @Test
+    public void testGetInvalidSection() {
+        ConfigFile configFile = new ConfigFile();
+        assertNull(configFile.getSection("invalid"));
+    }
+
+    @Test(expected = SectionAlreadyExistsException.class)
 	public void testSectionAlreadyExists() {
 		ConfigFile configFile = new ConfigFile();
 		configFile.createNewSection("section1");

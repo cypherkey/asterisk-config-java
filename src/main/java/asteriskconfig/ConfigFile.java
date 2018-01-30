@@ -34,7 +34,7 @@ public class ConfigFile {
 		if (hasSection(sectionName))
 			return sections.get(sectionName);
 		else
-			throw new SectionNotFoundException(sectionName);
+			return null;
 	}
 	
 	public String toString() {
