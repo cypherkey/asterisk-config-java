@@ -35,13 +35,13 @@ public class ConfigSection {
 		
 		// Global sections do not have a [] section identifier
 		if (! name.equalsIgnoreCase(GLOBAL_SECTION)) {
-			sb.append(String.format("[%s]%n", getName()));
+			sb.append(String.format("[%s]%s", getName(), GlobalSettings.getInstance().getEol()));
 		}
 		
 		// Iterate over the entries
 		Iterator<IEntry> iterator = properties.iterator();
 		while(iterator.hasNext()) {
-			sb.append(String.format("%s%n", iterator.next().toString()));
+			sb.append(String.format("%s%s", iterator.next().toString(), GlobalSettings.getInstance().getEol()));
 		}
 		
 		// Return the String

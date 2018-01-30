@@ -33,6 +33,6 @@ public class ConfigSectionTest {
 		section.addProperty(new ConfigEntry("bob", "alice"));
 		section.addProperty(new IncludeProperty("file1"));
 		
-		assertEquals(String.format("[test]%nbob = alice%n#include file1%n"), section.toString());
+		assertEquals(String.format("[test]\nbob = alice\n#include file1\n"), section.toString());
 	}
 }
