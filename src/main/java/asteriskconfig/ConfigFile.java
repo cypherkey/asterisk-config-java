@@ -25,9 +25,13 @@ public class ConfigFile {
 	public ConfigSection getGlobal() {
 		return sections.get(ConfigSection.GLOBAL_SECTION);
 	}
-	
+
+	public Boolean hasSection(String sectionName) {
+		return sections.containsKey(sectionName);
+	}
+
 	public ConfigSection getSection(String sectionName) {
-		if (sections.containsKey(sectionName))
+		if (hasSection(sectionName))
 			return sections.get(sectionName);
 		else
 			throw new SectionNotFoundException(sectionName);

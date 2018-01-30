@@ -33,10 +33,13 @@ public class AstConfigParserTest {
         section = config.getGlobal();
         Comment c = (Comment) section.getEntries().get(1);
         assertEquals("SIP Configuration example for Asterisk", c.getComment());
-        
+
+        assertTrue(config.hasSection("4723136505"));
+        assertFalse(config.hasSection("invalidsection"));
+
         section = config.getSection("4723136505");
         ConfigEntry cfg = (ConfigEntry) section.getEntries().get(0);
         assertEquals("host", cfg.getKey());
-        assertEquals("209.141.61.119", cfg.getValue());
+        assertEquals("1.1.1.1", cfg.getValue());
     }
 }
