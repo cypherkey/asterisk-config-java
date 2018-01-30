@@ -61,26 +61,29 @@ public class AstConfigParser {
 				}
 
 				if (line.toLowerCase().startsWith(INCLUDE_DIRECTIVE)) {
+					// Include line. Example: #include file.conf
 					String[] tokens = line.split(" ");
 					if (tokens.length != 2) {
 						throw new InvalidFileFormatException("Include directive has too many parts");
 					}
 					Include entry = new Include(tokens[1].trim(), comment);
 					currentSection.addEntry(entry);
-				}
-				else if (line.contains(DIRECTIVE_DELIMITER)) {
+				} else if (line.contains(DIRECTIVE_DELIMITER)) {
+					// Key/Value line. Example: key => value.
 					String[] tokens = line.split(DIRECTIVE_DELIMITER);
 					if (tokens.length == 2) {
 						Directive entry = new Directive(tokens[0].trim(), tokens[1].trim(), comment);
 						currentSection.addEntry(entry);
 					}
-				}
-				else {
+				} else if (line.contains(DELIMITER)) {
+					// Key/Value line. Example: key = value.
 					String[] tokens = line.split(DELIMITER);
 					if (tokens.length == 2) {
 						ConfigEntry entry = new ConfigEntry(tokens[0].trim(), tokens[1].trim(), comment);
 						currentSection.addEntry(entry);
 					}
+				} else if (line.trim().isEmpty()) {
+					// Empty line. Do nothing.
 				}
 			}
 		}

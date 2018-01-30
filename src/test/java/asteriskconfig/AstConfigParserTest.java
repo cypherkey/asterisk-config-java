@@ -9,6 +9,21 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class AstConfigParserTest {
+    @Test(expected = InvalidFileFormatException.class)
+    public void testInvalidFileFormatExceptionDueToDuplicationSection() throws Exception {
+        File f = new File(getClass().getClassLoader().getResource("invalid1.conf").getFile());
+
+        AstConfigParser parser = new AstConfigParser();
+        ConfigFile config = parser.parse(f);
+    }
+
+    @Test(expected = InvalidFileFormatException.class)
+    public void testInvalidFileFormatExceptionDueToIncludeTokens() throws Exception {
+        File f = new File(getClass().getClassLoader().getResource("invalid2.conf").getFile());
+
+        AstConfigParser parser = new AstConfigParser();
+        ConfigFile config = parser.parse(f);
+    }
 
     @Test
     public void testParseExten() throws Exception {
