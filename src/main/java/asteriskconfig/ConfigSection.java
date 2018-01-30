@@ -3,6 +3,7 @@ package asteriskconfig;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ConfigSection {
 	public static final String GLOBAL_SECTION = "__GLOBAL__";
@@ -22,14 +23,18 @@ public class ConfigSection {
 		entries.add(entry);
 	}
 
+    public IEntry get(Integer index) {
+        return entries.get(index);
+    }
+
 	public List<IEntry> getEntries() {
 		return entries;
 	}
-	
-	public IEntry get(Integer index) {
-		return entries.get(index);
-	}
-	
+
+	public List<IEntry> getEntriesOfType(Class c) {
+	    return entries.stream().filter(p -> c.isInstance(p)).collect(Collectors.toList());
+    }
+
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		
