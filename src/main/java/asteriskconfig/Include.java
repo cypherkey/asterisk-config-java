@@ -1,13 +1,13 @@
 package asteriskconfig;
 
-public class IncludeProperty extends ValueOnlyImpl implements IValueOnly {
+public class Include extends ValueOnlyImpl implements IValueOnly {
 	public static final String DELIMITER = " ";
 
-	public IncludeProperty(String value) {
+	public Include(String value) {
 		super(value);
 	}
 	
-	public IncludeProperty(String value, String comment) {
+	public Include(String value, String comment) {
 		super(value, comment);
 	}
 

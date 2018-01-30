@@ -2,19 +2,18 @@ package asteriskconfig;
 
 import static org.junit.Assert.*;
 
-import asteriskconfig.IncludeProperty;
 import org.junit.Test;
 
-public class IncludePropertyTest {
+public class IncludeTest {
 	@Test
 	public void testConstructor() {
-		IncludeProperty p = new IncludeProperty("bar");
+		Include p = new Include("bar");
 		assertEquals("bar", p.getValue());
 	}
 
 	@Test
 	public void testSerialization() {
-		IncludeProperty p = new IncludeProperty("bar1");
+		Include p = new Include("bar1");
 		assertEquals(String.format("#include bar1"), p.toString());
 	}
 }

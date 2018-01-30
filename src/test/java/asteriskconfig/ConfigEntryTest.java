@@ -8,23 +8,31 @@ import org.junit.Test;
 public class ConfigEntryTest {
 	@Test
 	public void testConstructor() {
-		ConfigEntry p = new ConfigEntry("foo", "bar");
-		assertEquals("foo", p.getKey());
-		assertEquals("bar", p.getValue());
+		ConfigEntry entry = new ConfigEntry("foo", "bar");
+		assertEquals("foo", entry.getKey());
+		assertEquals("bar", entry.getValue());
+
+		entry = new ConfigEntry("bob", "alice", "mycomment");
+		assertEquals("bob", entry.getKey());
+		assertEquals("alice", entry.getValue());
+		assertEquals("mycomment", entry.getComment());
 	}
 
 	@Test
 	public void testSetters() {
-		ConfigEntry p = new ConfigEntry("foo", "bar");
-		assertEquals("bar", p.getValue());
+		ConfigEntry entry = new ConfigEntry("foo", "bar");
+		assertEquals("bar", entry.getValue());
 
-		p.setValue("bar1");
-		assertEquals("bar1", p.getValue());
+		entry.setValue("bar1");
+		assertEquals("bar1", entry.getValue());
 	}
 
 	@Test
 	public void testSerialization() {
-		ConfigEntry p = new ConfigEntry("foo", "bar");
-		assertEquals("foo = bar", p.toString());
+		ConfigEntry entry = new ConfigEntry("foo", "bar");
+		assertEquals("foo = bar", entry.toString());
+
+		entry = new ConfigEntry("bob","alice","mycomment");
+		assertEquals(String.format("bob = alice%s; mycomment", GlobalSettings.getInstance().getInlineCommentPrefix()), entry.toString());
 	}
 }

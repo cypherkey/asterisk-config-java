@@ -1,13 +1,13 @@
 package asteriskconfig;
 
-public class DirectiveProperty extends KeyValueImpl {
+public class Directive extends KeyValueImpl {
 	public static final String DELIMITER = "=>";
 
-	public DirectiveProperty(String key, String value) {
+	public Directive(String key, String value) {
 		super(key, value);
 	}
 
-	public DirectiveProperty(String key, String value, String comment) {
+	public Directive(String key, String value, String comment) {
 		super(key, value, comment);
 	}
 

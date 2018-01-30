@@ -2,8 +2,6 @@ package asteriskconfig;
 
 import static org.junit.Assert.*;
 
-import asteriskconfig.AstConfigParser;
-import asteriskconfig.ConfigFile;
 import org.junit.Test;
 
 import java.io.File;
@@ -27,17 +25,17 @@ public class AstConfigParserTest {
 
         ConfigSection section = config.getSection("general");
 
-        ConfigEntry d = (ConfigEntry) section.getProperties().get(5);
+        ConfigEntry d = (ConfigEntry) section.getEntries().get(5);
         assertEquals("allowoverlap", d.getKey());
         assertEquals("no", d.getValue());
         assertEquals("Disable overlap dialing support. (Default is yes)", d.getComment());
         
         section = config.getGlobal();
-        Comment c = (Comment) section.getProperties().get(1);
+        Comment c = (Comment) section.getEntries().get(1);
         assertEquals("SIP Configuration example for Asterisk", c.getComment());
         
         section = config.getSection("4723136505");
-        ConfigEntry cfg = (ConfigEntry) section.getProperties().get(0);
+        ConfigEntry cfg = (ConfigEntry) section.getEntries().get(0);
         assertEquals("host", cfg.getKey());
         assertEquals("209.141.61.119", cfg.getValue());
     }

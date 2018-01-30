@@ -8,7 +8,7 @@ public class ConfigSection {
 	public static final String GLOBAL_SECTION = "__GLOBAL__";
 	
 	private String name;
-	private List <IEntry> properties = new ArrayList<IEntry>();
+	private List <IEntry> entries = new ArrayList<IEntry>();
 	
 	public ConfigSection(String name) {
 		this.name = name;
@@ -18,16 +18,16 @@ public class ConfigSection {
 		return name;
 	}
 	
-	public void addProperty(IEntry property) {
-		properties.add(property);
+	public void addEntry(IEntry entry) {
+		entries.add(entry);
 	}
 
-	public List<IEntry> getProperties() {
-		return properties;
+	public List<IEntry> getEntries() {
+		return entries;
 	}
 	
 	public IEntry get(Integer index) {
-		return properties.get(index);
+		return entries.get(index);
 	}
 	
 	public String toString() {
@@ -39,7 +39,7 @@ public class ConfigSection {
 		}
 		
 		// Iterate over the entries
-		Iterator<IEntry> iterator = properties.iterator();
+		Iterator<IEntry> iterator = entries.iterator();
 		while(iterator.hasNext()) {
 			sb.append(String.format("%s%s", iterator.next().toString(), GlobalSettings.getInstance().getEol()));
 		}

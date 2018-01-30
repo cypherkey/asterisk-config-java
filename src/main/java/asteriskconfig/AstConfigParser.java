@@ -38,7 +38,7 @@ public class AstConfigParser {
 
 				// Add the comment
 				Comment entry = new Comment(line);
-				currentSection.addProperty(entry);
+				currentSection.addEntry(entry);
 			}
 			else if (line.startsWith(SECTION_START) && line.endsWith(SECTION_END)) {
 
@@ -65,21 +65,21 @@ public class AstConfigParser {
 					if (tokens.length != 2) {
 						throw new InvalidFileFormatException("Include directive has too many parts");
 					}
-					IncludeProperty property = new IncludeProperty(tokens[1].trim(), comment);
-					currentSection.addProperty(property);
+					Include entry = new Include(tokens[1].trim(), comment);
+					currentSection.addEntry(entry);
 				}
 				else if (line.contains(DIRECTIVE_DELIMITER)) {
 					String[] tokens = line.split(DIRECTIVE_DELIMITER);
 					if (tokens.length == 2) {
-						DirectiveProperty entry = new DirectiveProperty(tokens[0].trim(), tokens[1].trim(), comment);
-						currentSection.addProperty(entry);
+						Directive entry = new Directive(tokens[0].trim(), tokens[1].trim(), comment);
+						currentSection.addEntry(entry);
 					}
 				}
 				else {
 					String[] tokens = line.split(DELIMITER);
 					if (tokens.length == 2) {
 						ConfigEntry entry = new ConfigEntry(tokens[0].trim(), tokens[1].trim(), comment);
-						currentSection.addProperty(entry);
+						currentSection.addEntry(entry);
 					}
 				}
 			}
